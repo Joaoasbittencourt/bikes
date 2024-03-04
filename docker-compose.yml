@@ -1,0 +1,53 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - migration
+    environment:
+      - ConnectionStrings__MottuDb=User ID=root;Password=root;Host=db;Port=5432;Database=mottu_db;
+    profiles:
+      - default
+  db:
+    image: postgres:15.1
+    container_name: mottu_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=mottu_db
+    cap_add:
+      - SYS_NICE
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "root", "-d", "mottu_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    profiles:
+      - default
+      - infra
+  migration:
+    build:
+      context: .
+      dockerfile: Dockerfile.migration
+    environment:
+    - PATH=/root/.dotnet/tools:$PATH
+    - ConnectionStrings__MottuDb=User ID=root;Password=root;Host=db;Port=5432;Database=mottu_db;
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    command: >
+      /bin/sh -c "dotnet ef database update"
+    profiles:
+      - default
+      - infra
+volumes:
+ db_data:
