@@ -2,8 +2,22 @@ using Microsoft.EntityFrameworkCore;
 using Minio;
 using Mottu.Data;
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("MottuDb");
+
+builder
+    .Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System
+            .Text
+            .Json
+            .Serialization
+            .ReferenceHandler
+            .Preserve;
+    });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -23,8 +37,6 @@ builder.Services.AddMinio(config =>
 builder.Services.AddControllers();
 
 var app = builder.Build();
-
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 app.UseSwagger();
 app.UseSwaggerUI();

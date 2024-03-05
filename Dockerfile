@@ -1,17 +1,16 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
-WORKDIR /app/api
+WORKDIR /app
 
-RUN dotnet tool install --global dotnet-ef
-ENV PATH="$PATH:/root/.dotnet/tools"
 ENV ASPNETCORE_ENVIRONMENT=Development
 
-COPY *.csproj ./
-RUN dotnet restore
+COPY api/*.csproj ./api/
+RUN dotnet restore "./api/mottu.csproj"
 
-COPY . ./
+COPY api/ ./api/
+WORKDIR /app/api
 RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=build-env /app/api/out .
 ENTRYPOINT ["dotnet", "mottu.dll"]

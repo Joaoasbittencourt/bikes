@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mottu.Data;
 using Mottu.Data.Dtos;
 using Mottu.Data.Queries;
@@ -69,11 +70,21 @@ public class BikeController(MottuDbContext context) : Controller
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var bike = _context.Bikes.Find(id);
+        var bike = _context
+            .Bikes.Where(b => b.Id == id)
+            .Include(b => b.Rentals.Where(r => r.EndDate > DateTime.Now))
+            .FirstOrDefault();
+
         if (bike == null)
         {
             return NotFound();
         }
+
+        if (bike.Rentals.Count != 0)
+        {
+            return BadRequest("Bike is already rented");
+        }
+
         _context.Bikes.Remove(bike);
         _context.SaveChanges();
         return NoContent();

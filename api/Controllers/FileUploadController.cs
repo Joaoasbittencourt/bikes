@@ -49,7 +49,8 @@ public class FileUploadController(IMinioClient minioClient) : Controller
             }
         }
 
-        string publicUrl = $"http://localhost:9000/{bucketName}/{objectName}";
+        // Move to env variable
+        var publicUrl = $"http://localhost:9000/{bucketName}/{objectName}";
 
         return Ok(new { Url = publicUrl });
     }
