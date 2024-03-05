@@ -19,9 +19,9 @@ dotnet ef database update
 - [x] Riders
   - [x] Create [Rider]
   - [x] Update [Rider].[cnhPhotoUrl]
-- [ ] Upload Image
-  - [ ] Minio setup on docker-compose
-  - [ ] Uploading image file -> url
+- [x] Upload Image
+  - [x] Minio setup on docker-compose
+  - [x] Uploading image file -> url
 - [ ] Rentals
   - [ ] RentalPlans [RentalPlan].[id, name, pricePerDay, durationDays]
   - [ ] Create [Rental].[id, bikeId(only one bike per rental), riderId, planId, endAt]
@@ -34,13 +34,16 @@ dotnet ef database update
   - [ ] accept order
   - [ ] finish order
 - [ ] Notifications
-  - [ ] create consumer
-- [ ] Authorization
-  - [ ] define what is possible for Riders and Admins
-- [ ] Tests
-  - [ ] Unit
-  - [ ] Integration
-- [ ] Frontend
+  - [ ] Add RabbitMQ instance to docker-compose
+  - [ ] Create consumer that saves to db
+  - [ ] Notify Riders when a new bike is available
+- [ ] If There is Time
+  - [ ] Authorization
+    - [ ] define what is possible for Riders and Admins
+  - [ ] Tests
+    - [ ] Unit
+    - [ ] Integration
+  - [ ] Frontend
 
 
 - [Bike]

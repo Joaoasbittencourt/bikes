@@ -49,5 +49,19 @@ services:
     profiles:
       - default
       - infra
+  minio:
+    image: minio/minio
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    command: server /data
+    profiles:
+      - default
+      - infra
 volumes:
  db_data:
+ minio_data:
