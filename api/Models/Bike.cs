@@ -1,17 +1,14 @@
 namespace Mottu.Models;
 
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
+[Index(nameof(Plate), IsUnique = true)]
 public class Bike
 {
     [Key]
     public int Id { get; set; }
     public int Year { get; set; }
-    public string Model { get; set; }
-    public string Identifier { get; set; }
-    public string Plate { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
-    public DateTime? DeletedAt { get; set; }
+    public required string Model { get; set; }
+    public required string Plate { get; set; }
 }

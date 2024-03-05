@@ -13,10 +13,6 @@ public class CreateBikeDto
     public required string Model { get; set; }
 
     [Required]
-    [StringLength(50, MinimumLength = 1)]
-    public required string Identifier { get; set; }
-
-    [Required]
     [StringLength(7, MinimumLength = 7)]
     public required string Plate { get; set; }
 }
