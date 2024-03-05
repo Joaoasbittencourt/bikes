@@ -1,17 +1,17 @@
+using Bikes.Data;
+using Bikes.Data.Dtos;
+using Bikes.Data.Queries;
+using Bikes.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Mottu.Data;
-using Mottu.Data.Dtos;
-using Mottu.Data.Queries;
-using Mottu.Models;
 
-namespace Mottu.Controllers;
+namespace Bikes.Controllers;
 
 [ApiController]
 [Route("bikes")]
-public class BikeController(MottuDbContext context) : Controller
+public class BikeController(BikesDbContext context) : Controller
 {
-    private readonly MottuDbContext _context = context;
+    private readonly BikesDbContext _context = context;
 
     [HttpGet]
     public IActionResult List([FromQuery] GetBikesQuery query)

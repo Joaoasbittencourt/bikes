@@ -1,11 +1,11 @@
+using Bikes.Data;
 using Microsoft.EntityFrameworkCore;
 using Minio;
-using Mottu.Data;
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("MottuDb");
+var connectionString = builder.Configuration.GetConnectionString("BikesDb");
 
 builder
     .Services.AddControllers()
@@ -21,7 +21,7 @@ builder
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<MottuDbContext>((opts) => opts.UseNpgsql(connectionString));
+builder.Services.AddDbContext<BikesDbContext>((opts) => opts.UseNpgsql(connectionString));
 
 var minioConfig = builder.Configuration.GetRequiredSection("MinioConfig");
 

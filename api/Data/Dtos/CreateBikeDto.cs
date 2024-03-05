@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Mottu.Data.Dtos;
+namespace Bikes.Data.Dtos;
 
 public class CreateBikeDto
 {

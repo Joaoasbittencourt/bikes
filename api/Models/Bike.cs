@@ -1,8 +1,8 @@
-namespace Mottu.Models;
+namespace Bikes.Models;
 
 using System.ComponentModel.DataAnnotations;
+using bikes.Models;
 using Microsoft.EntityFrameworkCore;
-using mottu.Models;
 
 [Index(nameof(Plate), IsUnique = true)]
 public class Bike

@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Mottu.Models;
+using Bikes.Models;
 
-namespace mottu.Models;
+namespace bikes.Models;
 
 public class Rental
 {

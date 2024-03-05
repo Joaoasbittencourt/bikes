@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace mottu.Migrations
+namespace bikes.Migrations
 {
     /// <inheritdoc />
     public partial class AddRentals : Migration
@@ -20,14 +20,19 @@ namespace mottu.Migrations
                 type: "timestamp without time zone",
                 nullable: false,
                 oldClrType: typeof(DateTime),
-                oldType: "timestamp with time zone");
+                oldType: "timestamp with time zone"
+            );
 
             migrationBuilder.CreateTable(
                 name: "RentalPlans",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table
+                        .Column<int>(type: "integer", nullable: false)
+                        .Annotation(
+                            "Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
+                        ),
                     DaysDuration = table.Column<int>(type: "integer", nullable: false),
                     PricePerDay = table.Column<int>(type: "integer", nullable: false),
                     UnusedDayPrice = table.Column<int>(type: "integer", nullable: false),
@@ -36,16 +41,27 @@ namespace mottu.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RentalPlans", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "Rentals",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    StartDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Id = table
+                        .Column<int>(type: "integer", nullable: false)
+                        .Annotation(
+                            "Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
+                        ),
+                    StartDate = table.Column<DateTime>(
+                        type: "timestamp without time zone",
+                        nullable: false
+                    ),
+                    EndDate = table.Column<DateTime>(
+                        type: "timestamp without time zone",
+                        nullable: false
+                    ),
                     RiderId = table.Column<int>(type: "integer", nullable: false),
                     BikeId = table.Column<int>(type: "integer", nullable: false),
                     PlanId = table.Column<int>(type: "integer", nullable: false)
@@ -58,20 +74,24 @@ namespace mottu.Migrations
                         column: x => x.RiderId,
                         principalTable: "Bikes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade
+                    );
                     table.ForeignKey(
                         name: "FK_Rentals_RentalPlans_PlanId",
                         column: x => x.PlanId,
                         principalTable: "RentalPlans",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade
+                    );
                     table.ForeignKey(
                         name: "FK_Rentals_Riders_RiderId",
                         column: x => x.RiderId,
                         principalTable: "Riders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
 
             migrationBuilder.InsertData(
                 table: "Bikes",
@@ -81,71 +101,91 @@ namespace mottu.Migrations
                     { 1, "Yamaha V10 Tracker", "ABC1234", 2020 },
                     { 2, "Honda CB 500", "DEF5678", 2021 },
                     { 3, "Suzuki GSX 750", "GHI9101", 2019 }
-                });
+                }
+            );
 
             migrationBuilder.InsertData(
                 table: "RentalPlans",
-                columns: new[] { "Id", "DaysDuration", "OverdueDayPrice", "PricePerDay", "UnusedDayPrice" },
+                columns: new[]
+                {
+                    "Id",
+                    "DaysDuration",
+                    "OverdueDayPrice",
+                    "PricePerDay",
+                    "UnusedDayPrice"
+                },
                 values: new object[,]
                 {
                     { 1, 7, 5000, 3000, 600 },
                     { 2, 15, 5000, 2800, 1120 },
                     { 3, 30, 5000, 2200, 1320 }
-                });
+                }
+            );
 
             migrationBuilder.InsertData(
                 table: "Riders",
-                columns: new[] { "Id", "Birthdate", "CnhNumber", "CnhPhotoUrl", "CnhType", "Cnpj", "Name" },
+                columns: new[]
+                {
+                    "Id",
+                    "Birthdate",
+                    "CnhNumber",
+                    "CnhPhotoUrl",
+                    "CnhType",
+                    "Cnpj",
+                    "Name"
+                },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "1234567890", "https://example.com/cnh-photo.jpg", 0, "12345678900000", "John Doe" },
-                    { 2, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "1234567891", "https://example.com/cnh-photo.jpg", 0, "12345678900001", "Jane Doe" }
-                });
+                    {
+                        1,
+                        new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        "1234567890",
+                        "https://example.com/cnh-photo.jpg",
+                        0,
+                        "12345678900000",
+                        "John Doe"
+                    },
+                    {
+                        2,
+                        new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        "1234567891",
+                        "https://example.com/cnh-photo.jpg",
+                        0,
+                        "12345678900001",
+                        "Jane Doe"
+                    }
+                }
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_PlanId",
                 table: "Rentals",
-                column: "PlanId");
+                column: "PlanId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_RiderId",
                 table: "Rentals",
-                column: "RiderId");
+                column: "RiderId"
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Rentals");
+            migrationBuilder.DropTable(name: "Rentals");
 
-            migrationBuilder.DropTable(
-                name: "RentalPlans");
+            migrationBuilder.DropTable(name: "RentalPlans");
 
-            migrationBuilder.DeleteData(
-                table: "Bikes",
-                keyColumn: "Id",
-                keyValue: 1);
+            migrationBuilder.DeleteData(table: "Bikes", keyColumn: "Id", keyValue: 1);
 
-            migrationBuilder.DeleteData(
-                table: "Bikes",
-                keyColumn: "Id",
-                keyValue: 2);
+            migrationBuilder.DeleteData(table: "Bikes", keyColumn: "Id", keyValue: 2);
 
-            migrationBuilder.DeleteData(
-                table: "Bikes",
-                keyColumn: "Id",
-                keyValue: 3);
+            migrationBuilder.DeleteData(table: "Bikes", keyColumn: "Id", keyValue: 3);
 
-            migrationBuilder.DeleteData(
-                table: "Riders",
-                keyColumn: "Id",
-                keyValue: 1);
+            migrationBuilder.DeleteData(table: "Riders", keyColumn: "Id", keyValue: 1);
 
-            migrationBuilder.DeleteData(
-                table: "Riders",
-                keyColumn: "Id",
-                keyValue: 2);
+            migrationBuilder.DeleteData(table: "Riders", keyColumn: "Id", keyValue: 2);
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Birthdate",
@@ -153,7 +193,8 @@ namespace mottu.Migrations
                 type: "timestamp with time zone",
                 nullable: false,
                 oldClrType: typeof(DateTime),
-                oldType: "timestamp without time zone");
+                oldType: "timestamp without time zone"
+            );
         }
     }
 }

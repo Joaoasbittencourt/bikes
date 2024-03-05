@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace mottu;
+namespace bikes;
 
 public class UpdateRiderDto
 {

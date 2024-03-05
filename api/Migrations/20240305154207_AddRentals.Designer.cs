@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Mottu.Data;
+using Bikes.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace mottu.Migrations
+namespace bikes.Migrations
 {
-    [DbContext(typeof(MottuDbContext))]
+    [DbContext(typeof(BikesDbContext))]
     [Migration("20240305154207_AddRentals")]
     partial class AddRentals
     {
@@ -25,7 +25,7 @@ namespace mottu.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Mottu.Models.Bike", b =>
+            modelBuilder.Entity("Bikes.Models.Bike", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,7 +75,7 @@ namespace mottu.Migrations
                         });
                 });
 
-            modelBuilder.Entity("mottu.Models.Rental", b =>
+            modelBuilder.Entity("bikes.Models.Rental", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,7 +107,7 @@ namespace mottu.Migrations
                     b.ToTable("Rentals");
                 });
 
-            modelBuilder.Entity("mottu.Models.RentalPlan", b =>
+            modelBuilder.Entity("bikes.Models.RentalPlan", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -158,7 +158,7 @@ namespace mottu.Migrations
                         });
                 });
 
-            modelBuilder.Entity("mottu.Rider", b =>
+            modelBuilder.Entity("bikes.Rider", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -220,21 +220,21 @@ namespace mottu.Migrations
                         });
                 });
 
-            modelBuilder.Entity("mottu.Models.Rental", b =>
+            modelBuilder.Entity("bikes.Models.Rental", b =>
                 {
-                    b.HasOne("mottu.Models.RentalPlan", "Plan")
+                    b.HasOne("bikes.Models.RentalPlan", "Plan")
                         .WithMany()
                         .HasForeignKey("PlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Mottu.Models.Bike", "Bike")
+                    b.HasOne("Bikes.Models.Bike", "Bike")
                         .WithMany("Rentals")
                         .HasForeignKey("RiderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("mottu.Rider", "Rider")
+                    b.HasOne("bikes.Rider", "Rider")
                         .WithMany()
                         .HasForeignKey("RiderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -247,7 +247,7 @@ namespace mottu.Migrations
                     b.Navigation("Rider");
                 });
 
-            modelBuilder.Entity("Mottu.Models.Bike", b =>
+            modelBuilder.Entity("Bikes.Models.Bike", b =>
                 {
                     b.Navigation("Rentals");
                 });

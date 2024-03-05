@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace mottu.Models;
+namespace bikes.Models;
 
 public class RentalPlan
 {

@@ -35,7 +35,7 @@ dotnet ef database update
 - [x] Upload Image
   - [x] Minio setup on docker-compose
   - [x] Uploading image file -> url
-- [ ] Rentals
+- [x] Rentals
   - [x] RentalPlans [RentalPlan]
   - [x] Create [Rental].
   - [x] Block Remove [Bike] if [Bike].[Rental] is active

@@ -1,13 +1,13 @@
+using Bikes.Data;
 using Microsoft.AspNetCore.Mvc;
-using Mottu.Data;
 
-namespace Mottu.Controllers;
+namespace Bikes.Controllers;
 
 [ApiController]
 [Route("rental-plans")]
-public class RentalPlansController(MottuDbContext context) : Controller
+public class RentalPlansController(BikesDbContext context) : Controller
 {
-    private readonly MottuDbContext _context = context;
+    private readonly BikesDbContext _context = context;
 
     [HttpGet]
     public IActionResult List()

@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Mottu.Data;
+﻿using Bikes.Data;
+using Microsoft.AspNetCore.Mvc;
 
-namespace mottu;
+namespace bikes;
 
 [ApiController]
 [Route("riders")]
-public class RiderController(MottuDbContext context) : Controller
+public class RiderController(BikesDbContext context) : Controller
 {
-    private readonly MottuDbContext _context = context;
+    private readonly BikesDbContext _context = context;
 
     [HttpGet("{id}")]
     public IActionResult GetOne(int id)

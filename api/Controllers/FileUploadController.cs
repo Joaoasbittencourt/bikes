@@ -2,7 +2,7 @@
 using Minio;
 using Minio.DataModel.Args;
 
-namespace mottu;
+namespace bikes;
 
 [ApiController]
 [Route("files")]

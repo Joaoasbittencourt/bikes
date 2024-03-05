@@ -1,11 +1,11 @@
+using bikes;
+using Bikes.Models;
+using bikes.Models;
 using Microsoft.EntityFrameworkCore;
-using mottu;
-using mottu.Models;
-using Mottu.Models;
 
-namespace Mottu.Data;
+namespace Bikes.Data;
 
-public class MottuDbContext(DbContextOptions<MottuDbContext> options) : DbContext(options)
+public class BikesDbContext(DbContextOptions<BikesDbContext> options) : DbContext(options)
 {
     public DbSet<Bike> Bikes { get; set; }
     public DbSet<Rider> Riders { get; set; }

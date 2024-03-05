@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Mottu.Data;
+using Bikes.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace mottu.Migrations
+namespace bikes.Migrations
 {
-    [DbContext(typeof(MottuDbContext))]
+    [DbContext(typeof(BikesDbContext))]
     [Migration("20240305012808_AddRider")]
     partial class AddRider
     {
@@ -25,7 +25,7 @@ namespace mottu.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Mottu.Models.Bike", b =>
+            modelBuilder.Entity("Bikes.Models.Bike", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,7 +52,7 @@ namespace mottu.Migrations
                     b.ToTable("Bikes");
                 });
 
-            modelBuilder.Entity("mottu.Rider", b =>
+            modelBuilder.Entity("bikes.Rider", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

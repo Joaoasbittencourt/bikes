@@ -1,4 +1,4 @@
-namespace Mottu.Data.Queries
+namespace Bikes.Data.Queries
 {
     public class GetBikesQuery
     {

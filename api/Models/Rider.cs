@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace mottu;
+namespace bikes;
 
 [Index(nameof(Cnpj), IsUnique = true)]
 [Index(nameof(CnhNumber), IsUnique = true)]

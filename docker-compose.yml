@@ -8,12 +8,12 @@ services:
       - db
       - migration
     environment:
-      - ConnectionStrings__MottuDb=User ID=root;Password=root;Host=db;Port=5432;Database=mottu_db;
+      - ConnectionStrings__BikesDb=User ID=root;Password=root;Host=db;Port=5432;Database=bikes_db;
     profiles:
       - default
   db:
     image: postgres:15.1
-    container_name: mottu_db
+    container_name: bikes_db
     volumes:
       - db_data:/var/lib/postgresql/data
     ports:
@@ -22,11 +22,11 @@ services:
       - POSTGRES_HOST=db
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=mottu_db
+      - POSTGRES_DB=bikes_db
     cap_add:
       - SYS_NICE
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "root", "-d", "mottu_db"]
+      test: ["CMD", "pg_isready", "-U", "root", "-d", "bikes_db"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -39,7 +39,7 @@ services:
       dockerfile: Dockerfile.migration
     environment:
     - PATH=/root/.dotnet/tools:$PATH
-    - ConnectionStrings__MottuDb=User ID=root;Password=root;Host=db;Port=5432;Database=mottu_db;
+    - ConnectionStrings__BikesDb=User ID=root;Password=root;Host=db;Port=5432;Database=bikes_db;
     depends_on:
       - db
     volumes:
