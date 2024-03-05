@@ -9,6 +9,8 @@ builder.Services.AddDbContext<MottuDbContext>((opts) => opts.UseNpgsql(connectio
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();

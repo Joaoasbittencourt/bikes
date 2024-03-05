@@ -12,14 +12,13 @@ dotnet ef database update
 ### Features
 
 - [x] Bikes
-  - [x] Create [Bike].[id, plate, model, year]
-  - [x] [Bike].plate is unique
+  - [x] Create [Bike]
   - [x] List [Bike] filter by [Bike].plate
   - [x] Update [Bike].plate
   - [x] Remove [Bike]
-- [ ] Riders
-  - [ ] Create [Rider]
-  - [ ] Update [Rider].[cnhPhotoUrl]
+- [x] Riders
+  - [x] Create [Rider]
+  - [x] Update [Rider].[cnhPhotoUrl]
 - [ ] Upload Image
   - [ ] Minio setup on docker-compose
   - [ ] Uploading image file -> url
@@ -38,9 +37,17 @@ dotnet ef database update
   - [ ] create consumer
 - [ ] Authorization
   - [ ] define what is possible for Riders and Admins
+- [ ] Tests
+  - [ ] Unit
+  - [ ] Integration
 - [ ] Frontend
 
 
+- [Bike]
+  - id
+  - plate(unique)
+  - model
+  - year
 - [Rider]
   - id
   - name
